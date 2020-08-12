@@ -7,7 +7,8 @@ import urllib.error
 class Agent:  # pylint:disable=too-few-public-methods
     """HTTP agent for checking status code, contents, redirects, and errors."""
 
-    DELAY = 60 * 5
+    #DELAY = 60 * 5
+    DELAY = 10
 
     def __init__(self, config):
         self.url = config.pop('url')

@@ -1,7 +1,8 @@
 import socket
 
 class Agent:
-    DELAY = 60 * 5
+    #DELAY = 60 * 5
+    DELAY = 7
 
     def __init__(self, config):
         self.config = config

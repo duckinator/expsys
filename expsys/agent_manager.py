@@ -31,6 +31,7 @@ class AgentTask:
         if not self._expired(self.last_run, self.instance.DELAY):
             return self.status()
 
+        self.last_run = self._timestamp()
         value, message = self.instance.run()
         self.value = value
         self.message = message

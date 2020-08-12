@@ -6,9 +6,7 @@ from .notifications import NotificationManager
 class InferenceEngine:
     def __init__(self, agents, rules):
         self.notifications = NotificationManager()
-        self.inferences = {}
         self.agents = AgentManager(agents)
-        self.interpreter = Interpreter(self)
         self.rules = rules
         self._times = {}
 
@@ -16,7 +14,7 @@ class InferenceEngine:
         return self[name]
 
     def __contains__(self, name):
-        return name in self.rules or name in self.inferences or name in self.agents
+        return name in self.rules or name in self.agents
 
     def __getitem__(self, name):
         if not isinstance(name, str):
@@ -24,13 +22,12 @@ class InferenceEngine:
 
         if name in self.rules:
             try:
-                result = self.interpreter.run(self.rules[name])
+                return Interpreter(self).run(self.rules[name])
             except UndefinedVariableException as err:
                 print(f'ERROR: {err}')
                 return None
-        else:
-            result = self.inferences.get(name, self.agents.get(name))
+        elif name in self.agents:
+            return self.agents.get(name)
 
-        if result is None:
-            print(f"ERROR: Couldn't resolve {name}.")
-        return result
+        print(f"ERROR: Couldn't resolve {name}.")
+        return None

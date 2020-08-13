@@ -1,5 +1,5 @@
 class Agent:
-    DELAY = 60 * 5
+    DELAY = 60 * 10  # 10 minutes
 
     def __init__(self, config):
         self.config = config

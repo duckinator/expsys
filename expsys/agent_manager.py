@@ -65,12 +65,12 @@ class AgentManager:
 
     def get(self, name, default=None):
         if name in self._agents:
-            return self[name][0]
+            return self.__getitem__(name)
         else:
             return default
 
     def __getitem__(self, name):
-        return self._agents[name].run()
+        return self._agents[name].run()[0]
 
     @property
     def agents(self):

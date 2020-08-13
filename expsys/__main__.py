@@ -8,11 +8,11 @@ agents = {
     'domain_resolves':     {'type':'dns', 'domain':'parts.horse'},
     'website_up':          {'type':'http', 'url':'https://parts.horse'},
     'search_up':           {'type':'http', 'url':'https://parts.horse/search?q=attiny', 'contents':'ATtiny2313'},
-    'ssh_echo':            {'type':'ssh', 'dest':'freebsd@parts.horse', 'cmd':'echo -n'},
-    'website_up_local':    {'type':'ssh', 'dest':'freebsd@parts.horse', 'cmd':'curl https://parts.horse'},
-    'search_up_local':     {'type':'ssh', 'dest':'freebsd@parts.horse', 'cmd':'curl https://parts.horse/search?q=attiny'},
-    'elasticsearch_network': {'type':'ssh', 'dest':'freebsd@parts.horse', 'cmd':'curl localhost:9200/_stats'},
-    'elasticsearch_process': {'type':'ssh', 'dest':'freebsd@parts.horse', 'cmd':'pgrep -u elasticsearch java'},
+    'ssh_echo':            {'type':'ssh', 'dest':'freebsd@parts.horse', 'cmd':['echo', '-n']},
+    'website_up_local':    {'type':'ssh', 'dest':'freebsd@parts.horse', 'cmd':['curl', 'https://parts.horse']},
+    'search_up_local':     {'type':'ssh', 'dest':'freebsd@parts.horse', 'cmd':['curl', 'https://parts.horse/search?q=attiny']},
+    'elasticsearch_network': {'type':'ssh', 'dest':'freebsd@parts.horse', 'cmd':['curl', 'localhost:9200/_stats']},
+    'elasticsearch_process': {'type':'ssh', 'dest':'freebsd@parts.horse', 'cmd':['pgrep', '-u', 'elasticsearch', 'java']},
 }
 
 rules = {
@@ -30,7 +30,7 @@ watch = {
     'dns_failure': 'Domain does not resolve.',
     'server_inaccessible': 'Server inaccessible.',
     'server_up_website_down': 'Website is down, but server is accessible.',
-    #'elasticsearch_down': 'Elasticsearch is malfunctioning. (Likely affects search.)',
+    'elasticsearch_down': 'Elasticsearch is malfunctioning. (Likely affects search.)',
     'search_down_python_app': 'Search is down, likely due to the Python app.',
     'website_only_local': 'The website down, but accessible from the server it\'s hosted on.',
 }

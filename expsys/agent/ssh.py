@@ -1,3 +1,6 @@
+import subprocess
+
+
 class Agent:
     DELAY = 60 * 10  # 10 minutes
 
@@ -5,4 +8,15 @@ class Agent:
         self.config = config
 
     def run(self):
-        return (False, 'unimplemented')
+        try:
+            command = ['ssh', self.config['dest'], *self.config['cmd']]
+            result = subprocess.run(command,
+                                    check=False,
+                                    stdout=subprocess.PIPE,
+                                    stderr=subprocess.PIPE)
+            if result.returncode == 0:
+                return (True, result.stdout)
+            else:
+                return (False, result.stderr)
+        except Exception as err:
+            return (False, str(err))

@@ -25,7 +25,7 @@ rules = {
     'server_up_website_down': '!website_up &  ssh_echo',
     'website_up_search_down': ' website_up & !search_up',
     'elasticsearch_down':     '!server_inaccessible & (!elasticsearch_process | !elasticsearch_network)',
-    'search_down_python_app': 'website_up & !search_up_local & !elasticsearch_down',
+    'search_down_python_app': ' website_up & !search_up_local & !elasticsearch_down',
     'website_only_local':     '!website_up & website_up_local',
 }
 

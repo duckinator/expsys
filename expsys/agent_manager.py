@@ -8,6 +8,9 @@ from typing import Dict, Any
 class AgentTask:
     """A single task, managed by a AgentManager."""
 
+    #DELAY = 60 * 10
+    DELAY = 10
+
     def __init__(self, name: str, agent_config: Dict[str, Any]):
         self.last_run = 0
         self.name = name
@@ -28,7 +31,7 @@ class AgentTask:
 
     def run(self):
         # If the duration hasn't passed, bail early.
-        if not self._expired(self.last_run, self.instance.DELAY):
+        if not self._expired(self.last_run, self.DELAY):
             return self.status()
 
         self.last_run = self._timestamp()

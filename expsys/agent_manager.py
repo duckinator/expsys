@@ -62,7 +62,7 @@ class AgentManager:
 
     def get(self, name, default=None):
         if name in self._agents:
-            return self[name]
+            return self[name][0]
         else:
             return default
 

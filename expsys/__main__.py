@@ -30,7 +30,7 @@ watch = {
     'dns_failure': 'Domain does not resolve.',
     'server_inaccessible': 'Server inaccessible.',
     'server_up_website_down': 'Website is down, but server is accessible.',
-    'elasticsearch_down': 'Elasticsearch is malfunctioning. (Likely affects search.)',
+    #'elasticsearch_down': 'Elasticsearch is malfunctioning. (Likely affects search.)',
     'search_down_python_app': 'Search is down, likely due to the Python app.',
     'website_only_local': 'The website down, but accessible from the server it\'s hosted on.',
 }
@@ -49,9 +49,7 @@ while True:
     print(chr(27) + "c", end="")
     for name in watch:
         status = inf[name]
-        if not status:
-            print(f'[OKAY] {name}')
-        else:
-            print(f'[FAIL] {name}')
+        if status:
+            print(watch[name])
 
     wait(5)

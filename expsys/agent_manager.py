@@ -58,7 +58,7 @@ class AgentManager:
             self._agents[name] = AgentTask(name, agent_config)
 
     def status(self, name):
-        self._agents[name].status()
+        return self._agents[name].status()
 
     def __contains__(self, name):
         return name in self._agents

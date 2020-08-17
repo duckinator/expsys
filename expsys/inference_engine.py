@@ -8,7 +8,14 @@ class InferenceEngine:
         self.notifications = NotificationManager()
         self.agents = AgentManager(agents)
         self.rules = rules
+        self.inferences = {}
         self._times = {}
+
+    def status(self, name):
+        if name in self.agents:
+            return self.agents.status(name)
+        else:
+            return self.inferences.get(name)
 
     def get(self, name):
         return self[name]
@@ -22,10 +29,11 @@ class InferenceEngine:
 
         if name in self.rules:
             try:
-                return Interpreter(self).run(self.rules[name])
+                result = Interpreter(self).run(self.rules[name])
+                self.inferences[name] = (result, self.rules[name])
             except UndefinedVariableException as err:
-                print(f'ERROR: {err}')
-                return None
+                self.inferences[name] = (None, str(err))
+            return self.inferences[name][0]
         elif name in self.agents:
             return self.agents.get(name)
 

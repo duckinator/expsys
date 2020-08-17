@@ -1,4 +1,5 @@
 from time import sleep
+from textwrap import indent
 
 from .inference_engine import InferenceEngine
 
@@ -56,5 +57,5 @@ while True:
         status = inf[name]
         if status:
             print(watch[name])
-
+            print(indent(inf.status(name)[1], ' ' * 4))
     wait(5)

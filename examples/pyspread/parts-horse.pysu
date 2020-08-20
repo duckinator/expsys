@@ -1,0 +1,86 @@
+[Pyspread save file version]
+2.0
+[shape]
+100	5	3
+[grid]
+0	0	1	"'Rule Name (for expression)'"
+0	1	1	"'Expression'"
+1	0	1	"'dns_failure'"
+2	0	1	"'server_inaccessible'"
+3	0	1	"'server_up_website_down'"
+4	0	1	"'website_up_search_down'"
+5	0	1	"'elasticsearch_down'"
+6	0	1	"'search_down_python_app'"
+7	0	1	"'website_only_local'"
+1	1	1	"'!domain_resolves'"
+2	1	1	"'!website_up & !ssh_echo'"
+3	1	1	"'!website_up &  ssh_echo'"
+4	1	1	"' website_up & !search_up'"
+5	1	1	"'!server_inaccessible & (!elasticsearch_process | !elasticsearch_network)'"
+6	1	1	"' website_up & !search_up_local & !elasticsearch_down'"
+7	1	1	"'!website_up & website_up_local'"
+0	0	2	"'Rule Name (for Agent)'"
+0	1	2	"'Agent Configuration'"
+2	0	2	"'website_up'"
+3	0	2	"'search_up'"
+4	0	2	"'ssh_echo'"
+5	0	2	"'website_up_local'"
+6	0	2	"'search_up_local'"
+7	0	2	"'elasticsearch_network'"
+8	0	2	"'elasticsearch_process'"
+1	1	2	"{'type':'dns', 'domain':'parts.horse'}"
+2	1	2	"{'type':'http', 'url':'https://parts.horse'}"
+3	1	2	"{'type':'http', 'url':'https://parts.horse/search?q=attiny', 'contents':'ATtiny2313'}"
+4	1	2	"{'type':'ssh', 'dest':'freebsd@parts.horse', 'cmd':['echo', '-n']}"
+5	1	2	"{'type':'ssh', 'dest':'freebsd@parts.horse', 'cmd':['curl', 'https://parts.horse']}"
+6	1	2	"{'type':'ssh', 'dest':'freebsd@parts.horse', 'cmd':['curl', 'https://parts.horse/search?q=attiny']}"
+7	1	2	"{'type':'ssh', 'dest':'freebsd@parts.horse', 'cmd':['curl', 'localhost:9200/_stats']}"
+8	1	2	"{'type':'ssh', 'dest':'freebsd@parts.horse', 'cmd':['pgrep', '-u', 'elasticsearch', 'java']}"
+0	0	0	"'Matching Rule'"
+0	1	0	"'Explanation'"
+0	2	1	"'Watched'"
+1	2	1	'True'
+2	2	1	'True'
+3	2	1	'True'
+5	2	1	'True'
+6	2	1	'True'
+7	2	1	'True'
+0	3	1	"'Explanation'"
+1	3	1	"'Domain does not resolve.'"
+2	3	1	"'Server inaccessible.'"
+3	3	1	"'Parts Horse is down, but accessible via SSH.'"
+5	3	1	"'Elasticsearch is malfunctioning. (Likely affects search.)'"
+6	3	1	"'Search is down, likely due to the Python app.'"
+7	3	1	'"Parts Horse is down, but accessible from the server it\'s hosted on."'
+0	2	0	"'Details'"
+0	4	0	'update()'
+1	0	2	"'domain_resolves'"
+[attributes]
+[(0, 0)]	[(0, 1)]	[]	[]	[]	1	'fontweight'	75
+[(0, 0)]	[(0, 1)]	[]	[]	[]	2	'fontweight'	75
+[(0, 0)]	[(0, 2)]	[]	[]	[]	0	'fontweight'	75
+[]	[]	[]	[]	[(0, 4)]	0	'button_cell'	False
+[]	[]	[]	[]	[(0, 2)]	1	'fontweight'	75
+[]	[]	[]	[]	[(2, 2)]	1	'fontweight'	50
+[]	[]	[]	[]	[(0, 3)]	0	'fontweight'	75
+[]	[]	[]	[]	[(0, 3)]	1	'fontweight'	75
+[]	[]	[]	[]	[(0, 4)]	0	'button_cell'	'Update'
+[row_heights]
+[col_widths]
+0	1	221.0
+1	1	493.0
+0	2	186.0
+1	2	824.0
+2	0	206.0
+0	0	206.0
+1	0	248.0
+3	0	278.0
+4	0	206.0
+3	1	381.0
+2	1	92.0
+[macros]
+from expsys.pyspread import PyspreadInterface
+
+def update():
+    PyspreadInterface(S).update()
+    print('Done.')

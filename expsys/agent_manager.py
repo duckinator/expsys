@@ -2,7 +2,7 @@
 
 from datetime import datetime
 import importlib
-from typing import Dict, Any
+from typing import Any, Dict, Optional, Tuple
 
 
 class AgentTask:
@@ -33,7 +33,7 @@ class AgentTask:
     def expire(self):
         self._force_expired = True
 
-    def status(self) -> (bool, str):
+    def status(self) -> Tuple[bool, Optional[str]]:
         return (self.value, self.message)
 
     def run(self):

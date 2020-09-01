@@ -1,8 +1,10 @@
-class NotificationManager:
-    notifications = {}
+from typing import Dict
 
-    def set(self, key, message):
-        # TODO: Actually do something with it.
+
+class NotificationManager:
+    notifications: Dict[str, str] = {}
+
+    def set(self, key: str, message: str):
         print(f'[MESSAGE/{key:<20}] {message!r}')
         self.notifications[key] = message
 

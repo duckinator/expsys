@@ -16,5 +16,5 @@ class Agent:
                 return (True, result.stdout)
             else:
                 return (False, result.stderr)
-        except Exception as err:
+        except Exception as err:  # pylint: disable=broad-except
             return (False, str(err))

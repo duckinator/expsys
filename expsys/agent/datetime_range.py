@@ -14,6 +14,7 @@ class Agent:
 
         if self.valid:
             return (result in [*self.valid], result)
-
-        if self.range:
+        elif self.range:
             return (result in self.range, result)
+        else:
+            raise Exception("Either 'valid' or 'range' must be specified.")

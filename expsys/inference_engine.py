@@ -1,4 +1,4 @@
-from lla.interpreter import Interpreter, UndefinedVariableException
+from lla.interpreter import Interpreter, UndefinedVariableException  # type: ignore
 from .agent_manager import AgentManager
 from .notifications import NotificationManager
 

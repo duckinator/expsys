@@ -9,6 +9,6 @@ class Agent:
         try:
             result = socket.getaddrinfo(self.domain, None)
             addresses = {addr for (*_, (addr, *_)) in result}
-            return (True, 'Okay.')
-        except Exception as err:
+            return (True, ' '.join(addresses))
+        except Exception as err:  # pylint: disable=broad-except
             return (False, f'Domain {self.domain} could not be resolved.\n{err}')

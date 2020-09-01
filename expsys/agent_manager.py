@@ -12,6 +12,7 @@ class AgentTask:
     DELAY = 10
 
     def __init__(self, name: str, agent_config: Dict[str, Any]):
+        self._force_expired = False
         self.last_run = 0
         self.name = name
         self.config = agent_config
@@ -24,7 +25,13 @@ class AgentTask:
         return datetime.now().timestamp()
 
     def _expired(self, timestamp, duration):
+        if self._force_expired:
+            self._force_expired = True
+            return True
         return (self._timestamp() - timestamp) >= duration
+
+    def expire(self):
+        self._force_expired = True
 
     def status(self) -> (bool, str):
         return (self.value, self.message)
@@ -71,6 +78,10 @@ class AgentManager:
 
     def __getitem__(self, name):
         return self._agents[name].run()[0]
+
+    def expire(self):
+        for _, agent in self._agents.items():
+            agent.expire()
 
     @property
     def agents(self):

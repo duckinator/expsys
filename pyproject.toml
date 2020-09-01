@@ -14,4 +14,5 @@ github = false
 # Runs *only* pylint and mypy. (Not the actual tests.)
 lint = "pytest -k 'pylint or mypy' --pylint --mypy --verbose"
 # Runs tests and pylint.
-test = "pytest --pylint --mypy --doctest-glob='*.md' --doctest-glob='*.py' --verbose"
+#test = "pytest --pylint --mypy --doctest-glob='*.md' --doctest-glob='*.py' --verbose"
+test = "pytest --doctest-glob='*.md' --doctest-glob='*.py' --verbose"

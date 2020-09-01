@@ -17,9 +17,6 @@ class InferenceEngine:
         else:
             return self.inferences.get(name)
 
-    def expire(self):
-        self.agents.expire()
-
     def get(self, name):
         return self[name]
 

@@ -8,11 +8,7 @@ from typing import Any, Dict, Optional, Tuple
 class AgentTask:
     """A single task, managed by a AgentManager."""
 
-    #DELAY = 60 * 10
-    DELAY = 10
-
     def __init__(self, name: str, agent_config: Dict[str, Any]):
-        self._force_expired = False
         self.last_run = 0
         self.name = name
         self.config = agent_config
@@ -25,20 +21,20 @@ class AgentTask:
         return datetime.now().timestamp()
 
     def _expired(self, timestamp, duration):
-        if self._force_expired:
-            self._force_expired = True
-            return True
-        return (self._timestamp() - timestamp) >= duration
+        new_timestamp = self._timestamp()
 
-    def expire(self):
-        self._force_expired = True
+        # If time goes backwards, bust the cache.
+        if (new_timestamp - timestamp) < 0:
+            return True
+
+        return (new_timestamp - timestamp) >= duration
 
     def status(self) -> Tuple[bool, Optional[str]]:
         return (self.value, self.message)
 
     def run(self):
         # If the duration hasn't passed, bail early.
-        if not self._expired(self.last_run, self.DELAY):
+        if not self._expired(self.last_run, self.instance.DELAY):
             return self.status()
 
         self.last_run = self._timestamp()
@@ -78,10 +74,6 @@ class AgentManager:
 
     def __getitem__(self, name):
         return self._agents[name].run()[0]
-
-    def expire(self):
-        for _, agent in self._agents.items():
-            agent.expire()
 
     @property
     def agents(self):

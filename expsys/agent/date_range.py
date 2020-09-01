@@ -1,6 +1,8 @@
 from datetime import datetime
 
 class Agent:
+    DELAY = 0
+
     def __init__(self, config):
         self.attribute = config.get('attribute', config['attr'])
         self.range = range(*config['range'])

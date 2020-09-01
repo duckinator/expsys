@@ -36,7 +36,6 @@ def test_main(): # pylint: disable=too-many-statements
     inf = InferenceEngine(agents, rules)
 
     with freeze_time('2020-08-02'): # First Sunday -- matches nothing
-        assert datetime.now().strftime('%Y-%m-%d') == '2020-08-02'
         assert not inf['saturday']
         assert not inf['wednesday']
         assert not inf['1st Saturday of every month']
@@ -51,7 +50,6 @@ def test_main(): # pylint: disable=too-many-statements
         assert not inf['5th Wednesday of every month']
 
     with freeze_time('2020-08-01'): # First Saturday
-        inf.expire()
         assert datetime.now().strftime('%Y-%m-%d') == '2020-08-01'
         assert     inf['1st Saturday of every month']
         assert not inf['2nd Saturday of every month']
@@ -61,7 +59,6 @@ def test_main(): # pylint: disable=too-many-statements
         assert not inf['wednesday']
 
     with freeze_time('2020-08-08'): # Second Saturday
-        inf.expire()
         assert datetime.now().strftime('%Y-%m-%d') == '2020-08-08'
         assert not inf['1st Saturday of every month']
         assert     inf['2nd Saturday of every month']
@@ -71,7 +68,6 @@ def test_main(): # pylint: disable=too-many-statements
         assert not inf['wednesday']
 
     with freeze_time('2020-08-15'): # Third Saturday
-        inf.expire()
         assert datetime.now().strftime('%Y-%m-%d') == '2020-08-15'
         assert not inf['1st Saturday of every month']
         assert not inf['2nd Saturday of every month']
@@ -81,7 +77,6 @@ def test_main(): # pylint: disable=too-many-statements
         assert not inf['wednesday']
 
     with freeze_time('2020-08-22'): # Fourth Saturday
-        inf.expire()
         assert datetime.now().strftime('%Y-%m-%d') == '2020-08-22'
         assert not inf['1st Saturday of every month']
         assert not inf['2nd Saturday of every month']
@@ -91,7 +86,6 @@ def test_main(): # pylint: disable=too-many-statements
         assert not inf['wednesday']
 
     with freeze_time('2020-08-29'): # Fifth Saturday
-        inf.expire()
         assert datetime.now().strftime('%Y-%m-%d') == '2020-08-29'
         assert not inf['1st Saturday of every month']
         assert not inf['2nd Saturday of every month']
@@ -102,7 +96,6 @@ def test_main(): # pylint: disable=too-many-statements
 
 
     with freeze_time('2020-08-05'): # First Wednesday
-        inf.expire()
         assert datetime.now().strftime('%Y-%m-%d') == '2020-08-05'
         assert     inf['1st Wednesday of every month']
         assert not inf['2nd Wednesday of every month']
@@ -112,7 +105,6 @@ def test_main(): # pylint: disable=too-many-statements
         assert not inf['saturday']
 
     with freeze_time('2020-08-12'): # Second Wednesday
-        inf.expire()
         assert datetime.now().strftime('%Y-%m-%d') == '2020-08-12'
         assert not inf['1st Wednesday of every month']
         assert     inf['2nd Wednesday of every month']
@@ -122,7 +114,6 @@ def test_main(): # pylint: disable=too-many-statements
         assert not inf['saturday']
 
     with freeze_time('2020-08-19'): # Third Wednesday
-        inf.expire()
         assert datetime.now().strftime('%Y-%m-%d') == '2020-08-19'
         assert not inf['1st Wednesday of every month']
         assert not inf['2nd Wednesday of every month']
@@ -132,7 +123,6 @@ def test_main(): # pylint: disable=too-many-statements
         assert not inf['saturday']
 
     with freeze_time('2020-08-26'): # Fourth Wednesday
-        inf.expire()
         assert datetime.now().strftime('%Y-%m-%d') == '2020-08-26'
         assert not inf['1st Wednesday of every month']
         assert not inf['2nd Wednesday of every month']

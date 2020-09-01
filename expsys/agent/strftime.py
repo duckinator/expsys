@@ -13,6 +13,8 @@ class Agent:
         }
     """
 
+    DELAY = 0
+
     def __init__(self, config):
         self.format = config['format']
         self.match = config['match']

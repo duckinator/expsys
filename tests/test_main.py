@@ -12,45 +12,25 @@ def test_main(): # pylint: disable=too-many-statements
         'thursday': {'type': 'strftime', 'format': '%a', 'match': 'Thu'},
         'friday': {'type': 'strftime', 'format': '%a', 'match': 'Fri'},
         'saturday': {'type': 'strftime', 'format': '%a', 'match': 'Sat'},
-        'first_7_days': {
-            'type': 'datetime_range',
-            'attr': 'day',
-            'range': [1, 8],
-        },
-        'second_7_days': {
-            'type': 'datetime_range',
-            'attr': 'day',
-            'range': [8, 15],
-        },
-        'third_7_days': {
-            'type': 'datetime_range',
-            'attr': 'day',
-            'range': [15, 22],
-        },
-        'fourth_7_days': {
-            'type': 'datetime_range',
-            'attr': 'day',
-            'range': [22, 29],
-        },
-        'fifth_7_days': {
-            'type': 'datetime_range',
-            'attr': 'day',
-            'range': [28, 32],
-        },
+        'day_1_to_7': {'type': 'date_range', 'attr': 'day', 'range': [1, 8]},
+        'day_8_to_14': {'type': 'date_range', 'attr': 'day', 'range': [8, 15]},
+        'day_15_to_21': {'type': 'date_range', 'attr': 'day', 'range': [15, 22]},
+        'day_22_to_28': {'type': 'date_range', 'attr': 'day', 'range': [22, 29]},
+        'day_29_to_31': {'type': 'date_range', 'attr': 'day', 'range': [29, 32]},
     }
 
     rules = {
-        "1st Saturday of every month": 'saturday & first_7_days',
-        "2nd Saturday of every month": 'saturday & second_7_days',
-        "3rd Saturday of every month": 'saturday & third_7_days',
-        "4th Saturday of every month": 'saturday & fourth_7_days',
-        "5th Saturday of every month": 'saturday & fifth_7_days',
+        "1st Saturday of every month": 'saturday & day_1_to_7',
+        "2nd Saturday of every month": 'saturday & day_8_to_14',
+        "3rd Saturday of every month": 'saturday & day_15_to_21',
+        "4th Saturday of every month": 'saturday & day_22_to_28',
+        "5th Saturday of every month": 'saturday & day_29_to_31',
 
-        "1st Wednesday of every month": 'wednesday & first_7_days',
-        "2nd Wednesday of every month": 'wednesday & second_7_days',
-        "3rd Wednesday of every month": 'wednesday & third_7_days',
-        "4th Wednesday of every month": 'wednesday & fourth_7_days',
-        "5th Wednesday of every month": 'wednesday & fifth_7_days',
+        "1st Wednesday of every month": 'wednesday & day_1_to_7',
+        "2nd Wednesday of every month": 'wednesday & day_8_to_14',
+        "3rd Wednesday of every month": 'wednesday & day_15_to_21',
+        "4th Wednesday of every month": 'wednesday & day_22_to_28',
+        "5th Wednesday of every month": 'wednesday & day_29_to_31',
     }
 
     inf = InferenceEngine(agents, rules)
